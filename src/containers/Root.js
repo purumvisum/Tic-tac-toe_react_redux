@@ -7,7 +7,9 @@ export const store = configureStore();
 
 const Root = () => (
     <Provider store={store}>
-        <Board />
+        <div>
+            <Board />
+        </div>
     </Provider>
 );
 export default Root;

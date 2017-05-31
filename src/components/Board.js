@@ -2,7 +2,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import BlankCell from './BlankCell';
-import changeSymbol from '../actions/actions';
+import { changeSymbol, startNewGame } from '../actions/actions';
+import Message from '../components/message';
 
 const styles = {
     row: {
@@ -22,7 +23,7 @@ class Board extends Component {
                                 key={row}
                                 row={row}
                                 cell={cell}
-                                gameEnd = {this.props.gameEnd}
+                                gameEnd={this.props.gameEnd}
                                 onClick={this.props.handleClick}
                                 symbol={this.props.board[row][cell]}
                             />
@@ -34,9 +35,22 @@ class Board extends Component {
         );
     }
 
+    winMessage() {
+        return (
+            this.props.gameEnd ?
+                <Message
+                    startNew={this.props.startNew}
+                    win = {this.props.win}
+                    symbolPlayer={this.props.symbol}
+                />
+                : null
+        );
+    }
+
     render() {
         return (
             <div>
+                {this.winMessage()}
                 {this.buildMatrix()}
             </div>
         );
@@ -46,12 +60,18 @@ class Board extends Component {
 
 const mapStateToProps = (state) => ({
     board: state.board,
-    gameEnd: state.gameEnd
+    gameEnd: state.gameEnd,
+    symbol: state.symbol,
+    win: state.win
+
 });
 
 const mapDispatchToProps = (dispatch) => ({
     handleClick: (row, cell) => {
         dispatch(changeSymbol(row, cell));
+    },
+    startNew: () => {
+        dispatch(startNewGame());
     }
 });
 
