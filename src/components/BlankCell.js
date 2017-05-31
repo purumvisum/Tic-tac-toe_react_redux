@@ -13,21 +13,24 @@ const styles = {
 class BlankCell extends Component {
     constructor(props) {
         super(props);
-        this._onClick = this._onClick.bind(this);
+        this.onClick = this.onClick.bind(this);
     }
 
     /*
     * to pass props without binding
     */
-    _onClick() {
-        this.props.onClick(this.props.row, this.props.cell);
+    onClick() {
+        if (this.props.onClick) {
+            this.props.onClick(this.props.row, this.props.cell);
+        }
+
     }
 
     render() {
         return (
             <div
                 role="presentation"
-                onClick={this._onClick}
+                onClick={!this.props.gameEnd ? this.onClick : null}
                 style={styles.cell}>
                 {this.props.symbol}
             </div>
@@ -39,7 +42,8 @@ BlankCell.propTypes = {
     symbol: PropTypes.string.isRequired,
     onClick: PropTypes.func.isRequired,
     row: PropTypes.number.isRequired,
-    cell: PropTypes.number.isRequired
+    cell: PropTypes.number.isRequired,
+    gameEnd: PropTypes.bool.isRequired
 };
 
 

@@ -13,7 +13,7 @@ const styles = {
 class Board extends Component {
     buildMatrix() {
         return (
-            Object.keys(this.props.board).map((item, cell) => (
+            this.props.board.map((item, cell) => (
                 <div style={styles.row} className={`row row${cell}`} key={cell}>
                     {
                         this.props.board[cell].map((symbol, row) => (
@@ -22,6 +22,7 @@ class Board extends Component {
                                 key={row}
                                 row={row}
                                 cell={cell}
+                                gameEnd = {this.props.gameEnd}
                                 onClick={this.props.handleClick}
                                 symbol={this.props.board[row][cell]}
                             />
@@ -44,7 +45,8 @@ class Board extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    board: state.board
+    board: state.board,
+    gameEnd: state.gameEnd
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -54,8 +56,9 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 Board.propTypes = {
-    board: PropTypes.object.isRequired,
-    handleClick: PropTypes.func.isRequired
+    board: PropTypes.array.isRequired,
+    handleClick: PropTypes.func.isRequired,
+    gameEnd: PropTypes.bool.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Board);
