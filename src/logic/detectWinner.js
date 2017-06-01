@@ -16,7 +16,7 @@ function detectWinner(state) {
         // create array from values [0][0]/[1][0]/[2][0] to check cells
         for (const cell in state.board[row]) {
             // if there still empty cells
-            if(state.board[cell][row] === '') {
+            if (state.board[cell][row] === '') {
                 stillPlay = true;
             }
             countInCell.push(state.board[cell][row]);

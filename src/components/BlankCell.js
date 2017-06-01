@@ -23,7 +23,6 @@ class BlankCell extends Component {
         if (this.props.onClick) {
             this.props.onClick(this.props.row, this.props.cell);
         }
-
     }
 
     render() {
@@ -31,7 +30,8 @@ class BlankCell extends Component {
             <div
                 role="presentation"
                 onClick={!this.props.gameEnd ? this.onClick : null}
-                style={styles.cell}>
+                style={styles.cell}
+            >
                 {this.props.symbol}
             </div>
         );

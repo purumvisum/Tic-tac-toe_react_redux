@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import BlankCell from './BlankCell';
 import { changeSymbol, startNewGame } from '../actions/actions';
-import Message from '../components/message';
+import Message from '../components/Message';
 
 const styles = {
     row: {
@@ -39,8 +39,8 @@ class Board extends Component {
         return (
             this.props.gameEnd ?
                 <Message
-                    startNew={this.props.startNew}
-                    win = {this.props.win}
+                    startNew={this.props.startNewGame}
+                    win={this.props.win}
                     symbolPlayer={this.props.symbol}
                 />
                 : null
@@ -70,7 +70,7 @@ const mapDispatchToProps = (dispatch) => ({
     handleClick: (row, cell) => {
         dispatch(changeSymbol(row, cell));
     },
-    startNew: () => {
+    startNewGame: () => {
         dispatch(startNewGame());
     }
 });
@@ -78,7 +78,10 @@ const mapDispatchToProps = (dispatch) => ({
 Board.propTypes = {
     board: PropTypes.array.isRequired,
     handleClick: PropTypes.func.isRequired,
-    gameEnd: PropTypes.bool.isRequired
+    startNewGame: PropTypes.func.isRequired,
+    gameEnd: PropTypes.bool.isRequired,
+    win: PropTypes.bool.isRequired,
+    symbol: PropTypes.string.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Board);

@@ -3,8 +3,6 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import reducer from './reducers/reducers';
 
 export default function configureStore() {
-
-
     const middleware = applyMiddleware(
         thunkMiddleware
     );
