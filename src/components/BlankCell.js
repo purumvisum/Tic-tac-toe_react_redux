@@ -5,7 +5,11 @@ const styles = {
     cell: {
         border: '1px solid black',
         width: '70px',
-        height: '70px'
+        height: '70px',
+        lineHeight: '70px',
+        textAlign: 'center',
+        fontFamily: 'Arial',
+        fontSize: '50px'
     }
 };
 
